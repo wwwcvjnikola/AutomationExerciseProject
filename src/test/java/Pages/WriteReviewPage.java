@@ -18,6 +18,7 @@ public class WriteReviewPage {
     WebElement emailAddress;
     WebElement addReviewHere;
     WebElement submitButton;
+    WebElement confirmationMsg;
 
     public WriteReviewPage(WebDriver driver) {
         this.driver = driver;
@@ -41,6 +42,10 @@ public class WriteReviewPage {
 
     public WebElement getProductName(WebElement product) {
         return product.findElement(By.tagName("p"));
+    }
+
+    public WebElement getConfirmationMsg() {
+        return driver.findElement(By.cssSelector("div.alert-success"));
     }
 
     //******************************************************

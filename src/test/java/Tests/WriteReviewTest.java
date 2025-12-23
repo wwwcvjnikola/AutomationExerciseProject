@@ -35,6 +35,7 @@ public class WriteReviewTest extends BaseTest {
         String emaliAdress = "test@mail.com";
         String addReview = "Thank you ITBootcamp!";
         String expectedURL = "https://automationexercise.com/product_details/1";
+        String expectedConfirmationMsg = "Thank you for your review.";
 
         writeReviewPage.clickOnReviewProductButton(productName);
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
@@ -46,7 +47,9 @@ public class WriteReviewTest extends BaseTest {
         writeReviewPage.enterEmail(emaliAdress);
         writeReviewPage.enterReview(addReview);
         writeReviewPage.clickSubmitButton();
-        // postoji problem sa porukom potvrde, nestaje posle sekunde, probao sam i sa Thread.sleep
+
+        // Asertacija potvrdne poruke
+        Assert.assertEquals(writeReviewPage.getConfirmationMsg().getText(), expectedConfirmationMsg);
     }
 
 
