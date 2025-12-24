@@ -55,9 +55,6 @@ public class HomePage {
         return driver.findElement(By.cssSelector("#accordian a[href='#Men']"));
     }
 
-    public WebElement getKidsCategory() {
-        return driver.findElement(By.cssSelector("#accordian a[href='#Kids']"));
-    }
 
     // Child
     public List<WebElement> getChildCategories(String parentName) {
@@ -108,6 +105,7 @@ public class HomePage {
 
     //************************* Verification ******************************
 
+    // Metoda za proveru child kategorija da li su svi child elementi prisutni
     public boolean verifyChildCategories(String parentName, String[] expectedChildren) {
         List<String> actualChildren = new ArrayList<>();
 
@@ -122,6 +120,7 @@ public class HomePage {
         return true;
     }
 
+    // Metoda za proveru nakon filtriranja po nazivu (keyword) u reci proizvoda
     public boolean verifyProductsMatchCategory(String keyword) {
         List<WebElement> productList = getProducts();
 
@@ -140,6 +139,7 @@ public class HomePage {
 
     // ****************** Utility ****************************
 
+    // Hvala Deki!!
     private String normalizeText(String text) {
         return text.replaceAll("\\s+", "").trim().toLowerCase();
     }

@@ -55,7 +55,7 @@ public class HomePageTest extends BaseTest {
             // Asertacija za vidljivost svakog "add to cart" btn-a
             Assert.assertTrue(isDisplayed(btn), "--" + productName);
 
-            // Da li je klikabilan svaki "add to cart" btn na strani
+            // Da li je aktivan svaki "add to cart" btn na strani
             Assert.assertTrue(btn.isEnabled(), "--" + productName);
 
         }

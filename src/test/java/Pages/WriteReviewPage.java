@@ -40,16 +40,13 @@ public class WriteReviewPage {
         return driver.findElement(By.id("button-review"));
     }
 
-    public WebElement getProductName(WebElement product) {
-        return product.findElement(By.tagName("p"));
-    }
-
     public WebElement getConfirmationMsg() {
         return driver.findElement(By.cssSelector("div.alert-success"));
     }
 
     //******************************************************
 
+    // kako bismo odlucili (po imenu proizvoda) na koji review da kliknemo
     public void clickOnReviewProductButton(String productName) {
         List<WebElement> products = driver.findElements(By.cssSelector(".product-image-wrapper"));
 

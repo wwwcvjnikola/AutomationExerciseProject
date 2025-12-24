@@ -55,6 +55,7 @@ public class CartPage {
 
     //***********************************
 
+    // Metoda za dodavanje proizvoda na osnovu njegovog naziva
     public void clickOnAddToCartBtn(String expectedProductName) {
 
         for (WebElement product : getProducts()) {
@@ -89,6 +90,7 @@ public class CartPage {
         getContinueShoppingBtn().click();
     }
 
+    // Metoda za proveru da li je odredjeni proizvod dodat u korpu
     public boolean isProductAddedToCart(String productName) {
         for (WebElement item: getCartList()){
             String name = item.findElement(By.linkText(productName)).getText().trim();
@@ -99,6 +101,7 @@ public class CartPage {
         return false;
     }
 
+    // Metoda za brisanje proizvoda iz korpe na osnovu njegovog imena
     public void deleteProductFromTheCart(String productName) {
         for (WebElement item: getCartList()){
             String name = item.findElement(By.linkText(productName)).getText().trim();
