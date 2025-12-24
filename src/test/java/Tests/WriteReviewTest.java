@@ -50,10 +50,8 @@ public class WriteReviewTest extends BaseTest {
 
         // Asertacija potvrdne poruke
         Assert.assertEquals(writeReviewPage.getConfirmationMsg().getText(), expectedConfirmationMsg);
+
     }
-
-
-
 
 }
 

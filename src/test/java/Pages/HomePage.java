@@ -1,5 +1,6 @@
 package Pages;
 
+import org.apache.poi.xddf.usermodel.XDDFColorRgbBinary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,11 +46,6 @@ public class HomePage {
         return driver.findElement(By.cssSelector("h2.title.text-center"));
     }
 
-    // glavni filter container
-    public WebElement getCategory() {
-        return driver.findElement(By.id("accordian"));
-    }
-
     // Parent
     public WebElement getWomenCategory() {
         return driver.findElement(By.cssSelector("#accordian a[href='#Women']"));
@@ -64,16 +60,8 @@ public class HomePage {
     }
 
     // Child
-    public List<WebElement> getWomenChildCategories() {
-        return driver.findElements(By.cssSelector("#Women a"));
-    }
-
-    public List<WebElement> getMenChildCategories() {
-        return driver.findElements(By.cssSelector("#Men a"));
-    }
-
-    public List<WebElement> getKidsChildCategories() {
-        return driver.findElements(By.cssSelector("#Kids a"));
+    public List<WebElement> getChildCategories(String parentName) {
+        return driver.findElements(By.cssSelector("#" + parentName + " a"));
     }
 
     // nazivi proizvoda
@@ -99,7 +87,7 @@ public class HomePage {
         for (WebElement product : products) {
 
             String name = product.findElement(By.tagName("p")).getText();
-            if (name.equals(productName)) {
+            if (normalizeText(name).equals(normalizeText(productName))) {
                return product.findElement(By.cssSelector(".add-to-cart"));
             }
         }
@@ -108,27 +96,10 @@ public class HomePage {
 
     //********************************* FILTERI ******************************
 
-    public void clickOnWomenChildCategory(String childName) {
-        for (WebElement child : getWomenChildCategories()){
-            if (child.getText().equalsIgnoreCase(childName)){
-                child.click();
-                break;
-            }
-        }
-    }
+    public void clickOnChildCategory(String parentName, String childName) {
 
-    public void clickOnMenChildCategory(String childName) {
-        for (WebElement child : getMenChildCategories()){
-            if (child.getText().equalsIgnoreCase(childName)){
-                child.click();
-                break;
-            }
-        }
-    }
-
-    public void clickOnKidsChildCategory(String childName) {
-        for (WebElement child : getKidsChildCategories()){
-            if (child.getText().equalsIgnoreCase(childName)){
+        for (WebElement child: getChildCategories(parentName)) {
+            if (normalizeText(child.getText()).equals(normalizeText(childName))) {
                 child.click();
                 break;
             }
@@ -137,14 +108,14 @@ public class HomePage {
 
     //************************* Verification ******************************
 
-    public boolean verifyWomenChildCategories(String[] expectedChildren) {
-        List<String> children = new ArrayList<>();
-        for (WebElement child : getWomenChildCategories()) {
-            children.add(child.getText().trim());
-        }
+    public boolean verifyChildCategories(String parentName, String[] expectedChildren) {
+        List<String> actualChildren = new ArrayList<>();
 
-        for (String expected : expectedChildren) {
-            if (!children.contains(expected)) {
+        for (WebElement child: getChildCategories(parentName)) {
+            actualChildren.add(normalizeText(child.getText()));
+        }
+        for (String expected:expectedChildren) {
+            if (!actualChildren.contains(normalizeText(expected))) {
                 return false;
             }
         }
@@ -152,17 +123,25 @@ public class HomePage {
     }
 
     public boolean verifyProductsMatchCategory(String keyword) {
-        List<WebElement> products = getProducts();
-        if (products.isEmpty()){
+        List<WebElement> productList = getProducts();
+
+        if (productList.isEmpty()) {
             return false;
         }
 
-        for (WebElement product : products) {
-            if (!product.getText().toLowerCase().contains(keyword.toLowerCase())) {
+        for (WebElement product: productList) {
+            if (!normalizeText(product.getText()).contains(normalizeText(keyword))) {
                 return false;
             }
         }
         return true;
+    }
+
+
+    // ****************** Utility ****************************
+
+    private String normalizeText(String text) {
+        return text.replaceAll("\\s+", "").trim().toLowerCase();
     }
 
 

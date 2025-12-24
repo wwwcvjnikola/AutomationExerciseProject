@@ -62,17 +62,30 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test
-    public void testWomenDressCategory() throws InterruptedException {
+    public void testWomenCategory() throws InterruptedException {
         WebElement women = homePage.getWomenCategory();
         scrollToElement(women);
         wait.until(ExpectedConditions.elementToBeClickable(women));
         women.click();
 
-        wait.until(ExpectedConditions.visibilityOfAllElements(homePage.getWomenChildCategories()));
-        Assert.assertTrue(homePage.verifyWomenChildCategories(new String[]{"Dress", "Tops", "Saree"}));
+        wait.until(ExpectedConditions.visibilityOfAllElements(homePage.getChildCategories("Women")));
+        Assert.assertTrue( homePage.verifyChildCategories("Women", new String[]{"Dress", "Tops", "Saree"}));
 
-        homePage.clickOnWomenChildCategory("Dress");
+        homePage.clickOnChildCategory("Women", "Dress");
         Assert.assertTrue(homePage.verifyProductsMatchCategory("dress"));
+    }
+
+    @Test void testMenCategory() {
+        WebElement men = homePage.getMenCategory();
+        scrollToElement(men);
+        wait.until(ExpectedConditions.elementToBeClickable(men));
+        men.click();
+
+        wait.until(ExpectedConditions.visibilityOfAllElements(homePage.getChildCategories("Men")));
+        Assert.assertTrue( homePage.verifyChildCategories("Men", new String[]{"Tshirts", "Jeans"}));
+
+        homePage.clickOnChildCategory("Men", "Jeans");
+        Assert.assertTrue(homePage.verifyProductsMatchCategory("jeans"));
     }
 
 }
