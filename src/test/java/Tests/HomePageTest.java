@@ -27,7 +27,7 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePage(driver);
     }
 
-    @Test
+    @Test (priority = 10)
     public void pageCheck(){
         String expectedUrl = "https://automationexercise.com/";
         //System.out.println(driver.getTitle());
@@ -41,7 +41,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(homePage.getFeaturesItemsTitle().getText(), expectedH2Title);
     }
 
-    @Test
+    @Test (priority = 20)
     public void addToCartBtnCheck() {
         for (int i=1; i < webExcelReader.getLastRow("ProductsNames"); i++) {
 
@@ -61,7 +61,7 @@ public class HomePageTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test (priority = 30)
     public void testWomenCategory() throws InterruptedException {
         WebElement women = homePage.getWomenCategory();
         scrollToElement(women);

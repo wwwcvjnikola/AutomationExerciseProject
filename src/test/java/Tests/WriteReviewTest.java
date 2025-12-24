@@ -28,7 +28,7 @@ public class WriteReviewTest extends BaseTest {
         writeReviewPage = new WriteReviewPage(driver);
     }
 
-    @Test
+    @Test (priority = 10)
     public void writeReviewTest() throws InterruptedException {
         String productName = "Blue Top";
         String yourName = "Nikola";

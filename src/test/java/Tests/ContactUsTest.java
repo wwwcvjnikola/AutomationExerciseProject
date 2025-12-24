@@ -30,7 +30,7 @@ public class ContactUsTest extends BaseTest {
 
     }
 
-    @Test
+    @Test (priority = 10)
     public void pageTest(){
         String expectedURL = "https://automationexercise.com/contact_us";
         String expectedFormTitle1 = "CONTACT US";
@@ -41,7 +41,7 @@ public class ContactUsTest extends BaseTest {
         Assert.assertEquals(contactUsPage.getGetInTouchTitle().getText(), expectedFormTitle2);
     }
 
-    @Test
+    @Test (priority = 20)
     public void formInput() throws InterruptedException {
         for (int i=1; i<= webExcelReader.getLastRow("ContactUs"); i++) {
 
