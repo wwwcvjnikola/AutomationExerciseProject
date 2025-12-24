@@ -1,13 +1,11 @@
 package Pages;
 
-import org.apache.poi.xddf.usermodel.XDDFColorRgbBinary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class HomePage {
 
@@ -37,9 +35,6 @@ public class HomePage {
         return driver.findElements(By.cssSelector(".navbar-nav li"));
     }
 
-    public List<WebElement> getAddToCartBtn() {
-        return driver.findElements(By.cssSelector(".btn.btn-default.add-to-cart"));
-    }
 
     // Title (container za proizvode) za proveru
     public WebElement getFeaturesItemsTitle() {
